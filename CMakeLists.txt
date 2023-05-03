@@ -14,9 +14,10 @@ find_package(Qt6 CONFIG REQUIRED COMPONENTS Widgets)
 
 add_executable(DynaTech
     main.cpp
-    DynaMainWindow.cpp 
+    DynaMainWindow.cpp
     DynaMainWindow.h
-    DynaMainWindow.ui
+    DynaDoc.cpp
+    DynaDoc.h
     )
 
 target_link_libraries(DynaTech Qt6::Widgets)

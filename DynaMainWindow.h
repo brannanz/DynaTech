@@ -1,19 +1,25 @@
 #pragma once
 
-#include <QMainWindow>
+#include <qmainwindow.h>
+#include <qmdiarea.h>
+#include <qmdisubwindow.h>
 
-namespace Ui {
-	class MainWindow;
-}
+#include "DynaDoc.h"
 
-class MainWindow : public QMainWindow
+class DynaMainWindow : public QMainWindow
 {
 	Q_OBJECT
 
 public:
-	explicit MainWindow(QWidget* parent = 0);
-	~MainWindow();
+	DynaMainWindow();
+	void newFile();
+
+private slots:
+	DynaDoc* createMdiChild();
 
 private:
-	Ui::MainWindow * ui;
+	DynaDoc* activeMdiChild() const;
+	QMdiSubWindow* findMdiChild(const QString& fileName) const;
+
+	QMdiArea* mdiArea = NULL;
 };

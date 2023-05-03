@@ -1,14 +1,31 @@
 #include "DynaMainWindow.h"
-#include "ui_DynaMainWindow.h"
 
-MainWindow::MainWindow(QWidget* parent) :
-	QMainWindow(parent),
-	ui(new Ui::MainWindow)
+DynaMainWindow::DynaMainWindow()
+	: mdiArea(new QMdiArea)
 {
-	ui->setupUi(this);
+	setCentralWidget(mdiArea);
 }
 
-MainWindow::~MainWindow()
+void DynaMainWindow::newFile()
 {
-	delete ui;
+	DynaDoc* child = createMdiChild();
+	child->show();
+}
+
+DynaDoc* DynaMainWindow::createMdiChild()
+{
+    DynaDoc* child = new DynaDoc;
+    mdiArea->addSubWindow(child);
+    mdiArea->setViewMode(QMdiArea::TabbedView);
+    mdiArea->setTabsClosable(true);
+    mdiArea->setTabsMovable(true);
+
+    return child;
+}
+
+DynaDoc* DynaMainWindow::activeMdiChild() const
+{
+    if (QMdiSubWindow* activeSubWindow = mdiArea->activeSubWindow())
+        return qobject_cast<DynaDoc*>(activeSubWindow->widget());
+    return nullptr;
 }
