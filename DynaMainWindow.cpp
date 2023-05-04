@@ -38,7 +38,7 @@ void DynaMainWindow::initDockingWidgets()
 
     DataModel* dataModel = new DataModel();
 
-    for (int i = 0; i < 80; i++)
+    for (int i = 0; i < 8; i++)
     {
         Instance* testInstance = new Instance();
         testInstance->setParent(dataModel);
