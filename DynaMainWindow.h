@@ -4,9 +4,14 @@
 #include <qmdiarea.h>
 #include <qmdisubwindow.h>
 #include <qdockwidget.h>
+#include <qtreewidget.h>
 
 #include "DynaProperties.h"
+#include "DynaExplorer.h"
 #include "DynaDoc.h"
+
+#include "DInstance.h"
+#include "DataModel.h"
 
 class DynaMainWindow : public QMainWindow
 {
@@ -28,6 +33,7 @@ private:
 	QMdiArea* mdiArea = NULL;
 
 	QDockWidget* explorer = NULL;
+	DynaExplorer* explorerTree = NULL;
 
 	QDockWidget* properties = NULL;
 	DynaPropertyGrid* propertyGrid = NULL;

@@ -14,6 +14,12 @@ find_package(Qt6 CONFIG REQUIRED COMPONENTS Widgets)
 
 add_executable(Dyna3D
     main.cpp
+    
+    DInstance.cpp
+    DInstance.h
+    DataModel.cpp
+    DataModel.h
+
     DynaMainWindow.cpp
     DynaMainWindow.h
     DynaExplorer.cpp
