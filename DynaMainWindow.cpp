@@ -38,9 +38,12 @@ void DynaMainWindow::initDockingWidgets()
 
     DataModel* dataModel = new DataModel();
 
-    Instance* instance = new Instance();
-    instance->setName("An instance");
-    instance->setParent(dataModel->getWorkspace().get());
+    for (int i = 0; i < 10; i++)
+    {
+        Instance* instance = new Instance();
+        instance->setName("An instance");
+        instance->setParent(dataModel->getWorkspace().get());
+    }
 
     QTreeWidgetItem* topLevelItem = new QTreeWidgetItem();
     explorerTree->addTopLevelItem(topLevelItem);
