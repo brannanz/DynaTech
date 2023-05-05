@@ -9,6 +9,11 @@ DataModel::DataModel()
 	initialize();
 }
 
+std::shared_ptr<Workspace> DataModel::getWorkspace()
+{
+	return workspace;
+}
+
 void DataModel::initialize()
 {
 	workspace->setParent(this);

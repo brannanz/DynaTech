@@ -38,18 +38,15 @@ void DynaMainWindow::initDockingWidgets()
 
     DataModel* dataModel = new DataModel();
 
-    for (int i = 0; i < 8; i++)
-    {
-        Instance* testInstance = new Instance();
-        testInstance->setParent(dataModel);
-        testInstance->setName("Instance");
-    }
+    Instance* instance = new Instance();
+    instance->setName("An instance");
+    instance->setParent(dataModel->getWorkspace().get());
 
-    for (int i = 0; i < dataModel->children.size(); i++) {
-        QTreeWidgetItem* topLevelItem = new QTreeWidgetItem();
-        explorerTree->addTopLevelItem(topLevelItem);
-        topLevelItem->setText(0, QString::fromStdString(dataModel->children[i]->getName()));
-    }
+    QTreeWidgetItem* topLevelItem = new QTreeWidgetItem();
+    explorerTree->addTopLevelItem(topLevelItem);
+    // topLevelItem->setHidden(true);
+
+    explorerTree->recurseThroughDataModel(dataModel->children, topLevelItem);
 
     // properties
     addDockWidget(Qt::RightDockWidgetArea, properties);
