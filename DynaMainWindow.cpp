@@ -43,11 +43,15 @@ void DynaMainWindow::initDockingWidgets()
         Instance* instance = new Instance();
         instance->setName("An instance");
         instance->setParent(dataModel->getWorkspace().get());
+
+        Instance* instance2 = new Instance();
+        instance2->setName("An instance 2");
+        instance2->setParent(instance);
     }
 
     QTreeWidgetItem* topLevelItem = new QTreeWidgetItem();
     explorerTree->addTopLevelItem(topLevelItem);
-    // topLevelItem->setHidden(true);
+    topLevelItem->setExpanded(true);
 
     explorerTree->recurseThroughDataModel(dataModel->children, topLevelItem);
 
