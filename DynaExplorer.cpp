@@ -5,6 +5,9 @@ DynaExplorer::DynaExplorer()
 {
 	setHeaderHidden(true); // we don't want the header since this doesn't have properties
 
+	setSelectionBehavior(QAbstractItemView::SelectItems);
+	setSelectionMode(QAbstractItemView::ContiguousSelection);
+
 	setModel(model);
 }
 
