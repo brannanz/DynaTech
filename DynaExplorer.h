@@ -1,13 +1,17 @@
 #pragma once
 
-#include <qtreewidget.h>
+#include <qtreeview.h>
+#include <qstandarditemmodel.h>
 
 #include "DataModel.h"
 
-class DynaExplorer : public QTreeWidget
+class DynaExplorer : public QTreeView
 {
 public:
 	DynaExplorer();
 
-	void recurseThroughDataModel(std::vector<Instance*> children, QTreeWidgetItem* parent);
+	void recurseThroughDataModel(std::vector<Instance*> children, QStandardItem* parent);
+
+	QStandardItemModel* model;
+	QStandardItem* root = model->invisibleRootItem();
 };
