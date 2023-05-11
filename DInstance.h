@@ -17,6 +17,7 @@ public:
 	std::string getName();
 	void setName(std::string newName);
 	void addChild(Instance* instance);
+	void removeChild(Instance* child);
 
 	std::vector<Instance*> children;
 protected:
