@@ -2,6 +2,6 @@
 
 Workspace::Workspace()
 {
-	name = "Workspace";
+	setName("Workspace");
 	className = "Workspace";
 }

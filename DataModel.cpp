@@ -3,7 +3,7 @@
 DataModel::DataModel()
 	: workspace(new Workspace)
 {
-	name = "Game";
+	setName("Game"); // ideally this is never seen
 	className = "DataModel";
 
 	initialize();
