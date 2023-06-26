@@ -1,8 +1,13 @@
 #include "scriptinterface.h"
 
+#include <string>
+#include <sstream>
+#include <iostream>
+#include "filesystem.h"
+
 void InternalDoWrite(WrenVM* vm, const char* text)
 {
-	g_output->Log(text);
+	g_output->Log(text, true);
 }
 
 void InternalDoError(WrenVM* vm, WrenErrorType errorType,
@@ -28,13 +33,19 @@ void InternalDoError(WrenVM* vm, WrenErrorType errorType,
 		} break;
 	}
 
-	if (err_msg == (char*)malloc(13 * sizeof(char)))
+	if (err_msg != NULL)
 	{
-		g_output->Log(err_msg);
+		g_output->Log(err_msg, false);
 	}
 	else {
-		g_output->Log("SCRIPT: Unidentified error");
+		g_output->Log("SCRIPT: Unidentified error", false);
 	}
+}
+
+WrenLoadModuleResult InternalLoadModule(WrenVM* vm, const char* name) {
+	WrenLoadModuleResult result = { 0 };
+	result.source = filesystem::LoadAsset("scripts/" + std::string(name)).c_str();
+	return result;
 }
 
 CScriptInterface::CScriptInterface(std::string file)
@@ -43,20 +54,20 @@ CScriptInterface::CScriptInterface(std::string file)
 	wrenInitConfiguration(&config);
 	config.writeFn = &InternalDoWrite;
 	config.errorFn = &InternalDoError;
+	config.loadModuleFn = &InternalLoadModule;
 	m_vm = wrenNewVM(&config);
 
 	const char* module = "main";
-	// const char* script = "System.print(\"WREN: Hello!\")";
 
 	WrenInterpretResult result = wrenInterpret(m_vm, module, file.c_str());
 
 	switch (result) {
 		case WREN_RESULT_COMPILE_ERROR:
-		{ g_output->Log("ENGINE: Script Compile Error"); } break;
+		{ g_output->Log("ENGINE: Script Compile Error", false); } break;
 		case WREN_RESULT_RUNTIME_ERROR:
-		{ g_output->Log("ENGINE: Script Runtime Error"); } break;
+		{ g_output->Log("ENGINE: Script Runtime Error", false); } break;
 		case WREN_RESULT_SUCCESS:
-		{ g_output->Log("ENGINE: Script Compile Success"); } break;
+		{ g_output->Log("ENGINE: Script Compile Success", false); } break;
 	}
 }
 

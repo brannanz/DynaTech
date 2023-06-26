@@ -5,10 +5,10 @@
 
 CScriptOutput::CScriptOutput()
 {
-	// setReadOnly(true);
+	setReadOnly(true);
 }
 
-void CScriptOutput::Log( std::string text )
+void CScriptOutput::Log( std::string text, bool isscript )
 {
 	const auto now = std::chrono::system_clock::now();
 	const std::time_t tc = std::chrono::system_clock::to_time_t( now );
@@ -19,5 +19,12 @@ void CScriptOutput::Log( std::string text )
 	// append( QString::fromStdString(timestr + " - " + text) );
 	// const char* out = text.c_str();
 	// addItem(new QListWidgetItem(out));
-	std::cout << text << std::endl;
+
+	if (!isscript)
+	{
+		std::cout << text << std::endl;
+	}
+	else {
+		std::cout << text;
+	}
 }

@@ -1,12 +1,12 @@
 #pragma once
 
 #include <qfilesystemmodel.h>
-#include <QListWidget>
+#include <qtextedit.h>
 
-class CScriptOutput : public QListWidget
+class CScriptOutput : public QTextEdit
 {
 public:
 	CScriptOutput();
 
-	void Log(std::string text);
+	void Log(std::string text, bool isscript);
 };

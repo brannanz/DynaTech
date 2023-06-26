@@ -21,10 +21,10 @@ void CreateScriptInstance(std::string file)
 
 void InitScriptThread(std::string file)
 {
-    g_output->Log("ENGINE: Running script");
+    g_output->Log("ENGINE: Running script " + file, false);
 
     // create thread
-    std::thread t(&CreateScriptInstance, file);
+    std::thread t(&CreateScriptInstance, filesystem::LoadAsset(file));
 
     // run along with everything else
     t.detach();
@@ -36,5 +36,5 @@ void CMainWindow::initDockingWidgets()
     addDockWidget(Qt::BottomDockWidgetArea, m_dwscriptOutput);
     m_dwscriptOutput->setWidget(g_output);
 
-    InitScriptThread(filesystem::LoadAsset("scripts/test.wren"));
+    InitScriptThread("scripts/test.wren");
 }
