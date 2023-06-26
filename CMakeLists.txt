@@ -12,16 +12,16 @@ list(APPEND CMAKE_PREFIX_PATH "Library/Qt")
 
 find_package(Qt6 CONFIG REQUIRED COMPONENTS Widgets)
 
+add_subdirectory(wren/projects/cmake)
+
 add_executable(Dyna3D
     main.cpp
-    DynaMainWindow.cpp
-    DynaMainWindow.h
-    DynaExplorer.cpp
-    DynaExplorer.h
-    DynaProperties.cpp
-    DynaProperties.h
-    DynaDoc.cpp
-    DynaDoc.h
+    mainwindow.cpp
+    mainwindow.h
+    scriptoutput.cpp
+    scriptoutput.h
+    scriptinterface.h
+    scriptinterface.cpp
     )
 
-target_link_libraries(Dyna3D Qt6::Widgets)
+target_link_libraries(Dyna3D PUBLIC Qt6::Widgets wren)

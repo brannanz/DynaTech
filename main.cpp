@@ -1,6 +1,6 @@
 #include <qapplication.h>
 
-#include "DynaMainWindow.h"
+#include "mainwindow.h"
 
 int main(int argc, char *argv[]) 
 {
@@ -11,13 +11,9 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName("Dyna3D");
     QCoreApplication::setApplicationVersion(QT_VERSION_STR);
 
-    DynaMainWindow mainWin;
-
-    mainWin.newFile();
-    mainWin.newFile();
+    CMainWindow mainWin;
 
     mainWin.show();
-
 
     return app.exec();
 } 
