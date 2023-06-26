@@ -9,7 +9,7 @@ static CScriptOutput* g_output;
 class CScriptInterface
 {
 public:
-	CScriptInterface();
+	CScriptInterface(std::string file);
 	~CScriptInterface();
 
 	WrenVM* m_vm;

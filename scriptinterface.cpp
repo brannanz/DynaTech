@@ -28,10 +28,16 @@ void InternalDoError(WrenVM* vm, WrenErrorType errorType,
 		} break;
 	}
 
-	g_output->Log(err_msg);
+	if (err_msg == (char*)malloc(13 * sizeof(char)))
+	{
+		g_output->Log(err_msg);
+	}
+	else {
+		g_output->Log("SCRIPT: Unidentified error");
+	}
 }
 
-CScriptInterface::CScriptInterface()
+CScriptInterface::CScriptInterface(std::string file)
 {
 	WrenConfiguration config;
 	wrenInitConfiguration(&config);
@@ -40,9 +46,9 @@ CScriptInterface::CScriptInterface()
 	m_vm = wrenNewVM(&config);
 
 	const char* module = "main";
-	const char* script = "System.print(\"WREN: Hello!\")";
+	// const char* script = "System.print(\"WREN: Hello!\")";
 
-	WrenInterpretResult result = wrenInterpret(m_vm, module, script);
+	WrenInterpretResult result = wrenInterpret(m_vm, module, file.c_str());
 
 	switch (result) {
 		case WREN_RESULT_COMPILE_ERROR:
